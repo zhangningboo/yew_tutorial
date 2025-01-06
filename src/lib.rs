@@ -4,7 +4,7 @@ use gloo::console::log;
 use stylist::{style, yew::styled_component};
 
 mod components;
-use components::button::Button;
+use components::{button::Button, form::Form};
 
 #[derive(Serialize, Deserialize)]
 struct MyData {
@@ -49,7 +49,9 @@ pub fn app() -> Html {
             <br/>
             <StyledApp />
             <br/>
-            <Button btn_name="Click me +1" />
+            <HelloButton />
+            <br/>
+            <Form />
         </>
     }
 }
@@ -64,5 +66,16 @@ fn styled_component() -> Html {
     ).unwrap();
     html! {
         <h1 class={ style }>{ "Hello, styled_component!" }</h1>
+    }
+}
+
+#[function_component(HelloButton)]
+fn hello_button() -> Html {
+    let on_load = Callback::from(move |message: String| {
+        log!(message);
+    });
+
+    html! {
+        <Button btn_name="Click me +1" on_load={ on_load }/>
     }
 }

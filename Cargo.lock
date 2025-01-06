@@ -1034,5 +1034,7 @@ dependencies = [
  "serde",
  "serde_json",
  "stylist",
+ "wasm-bindgen",
+ "web-sys",
  "yew",
 ]

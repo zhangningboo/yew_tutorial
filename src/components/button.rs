@@ -3,6 +3,7 @@ use yew::prelude::*;
 #[derive(Properties, PartialEq)]
 pub struct Props {
     pub btn_name: String,
+    pub on_load: Option<Callback<String>>,
 }
 
 #[function_component(Button)]
@@ -15,6 +16,10 @@ pub fn button(props: &Props) -> Html {
             counter.set(value);
         }
     };
+    // emit 保证在每次点击按钮的时候都会触发， 页面初始化后触发第一次执行
+    if let Some(on_load) = &props.on_load {
+        on_load.emit(format!("Button {} clicked {} times", props.btn_name.clone(), *counter));
+    }
 
     html! {
         <>
